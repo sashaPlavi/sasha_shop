@@ -2,7 +2,13 @@ const express = require("express");
 const bP = require("body-parser");
 const path = require("path");
 const port = 3003;
+
 const app = express();
+
+// seting templating angine
+app.set("view engine", "pug");
+app.set("views", "views");
+
 const adminData = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const mongoose = require("mongoose");
