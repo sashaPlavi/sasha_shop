@@ -21,10 +21,19 @@
     </header>
 
     <main>
-      <form class="product-form" action="/prod" method="post">
+      <form class="product-form" action="/addProd" method="post">
         <div class="form-control">
           <label for="title">title</label>
           <input type="text" name="title" />
+          <label for="price">price</label>
+          <input type="number" name="price" />
+          <label for="description">description</label>
+          <textarea
+            name="description"
+            placeholder="enter description"
+          ></textarea>
+          <label for="imageUrl">imageUrl</label>
+          <input type="text" name="imageUrl" />
           <button type="submit">
             add product
           </button>
