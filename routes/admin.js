@@ -8,8 +8,8 @@ const router = express.Router();
 
 const products = [];
 
-router.use("/add", (req, res, next) => {
-  res.sendFile(path.join(rootDir, "views", "add.html"));
+router.use("/add-product", (req, res, next) => {
+  res.render("add-products", { pageTitle: "sasha" });
 });
 
 router.post("/prod", (req, res, next) => {
