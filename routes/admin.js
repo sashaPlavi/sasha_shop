@@ -8,17 +8,8 @@ const router = express.Router();
 
 const products = [];
 
-router.use("/add-product", (req, res, next) => {
-  res.render("add-products", { pageTitle: "sasha" });
-});
+router.use("/add-products", adminController.getAddProducts);
 
-router.post("/prod", (req, res, next) => {
-  console.log(req.body);
-  products.push({ title: req.body.title });
+router.post("/addProducts", adminController.addProduct);
 
-  res.redirect("/");
-});
-router.post("/addProd", adminController.addProduct);
-
-exports.routes = router;
-exports.products = products;
+module.exports = router;

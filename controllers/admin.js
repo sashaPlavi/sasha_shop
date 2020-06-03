@@ -1,5 +1,12 @@
 const Products = require("../models/products");
 
+exports.getAddProducts = (req, res, next) => {
+  res.render("add-products", {
+    pageTitle: "sasha",
+    path: "/admin/add-products",
+  });
+};
+
 exports.addProduct = (req, res, next) => {
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;

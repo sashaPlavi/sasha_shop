@@ -4,22 +4,9 @@
 </head>
 
 <body>
-    <header class="main-header">
-        <nav class="main-header__nav">
-          <ul class="main-header__item-list">
-            <li class="main-header__item">
-              <a  class="active"     href="/">Shop</a>
-            </li>
-            <li class="main-header__item">
-              <a href="/add-product">Add Product</a
-              >
-            </li>
-          </ul>
-        </nav>
-      </header>
-
+  <%- include('includes/navigation.ejs') %>
     <main>
-        <form class="product-form" action="/addProd" method="post">
+        <form class="product-form" action="/admin/addProducts" method="post">
             <div class="form-control">
               <label for="title">title</label>
               <input type="text" name="title" />

@@ -9,7 +9,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
-const adminData = require("./routes/admin");
+const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const mongoose = require("mongoose");
 
@@ -26,10 +26,10 @@ db.once("open", function () {
 app.use(bP.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use(adminData.routes);
+app.use("/admin", adminRoutes);
 app.use(shopRoutes);
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "views", "fileNotFound.html"));
+  res.status(404).render("404", { pageTitle: "sasa", path: "/" });
 });
 
 app.listen(port, () => {
