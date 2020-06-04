@@ -61,6 +61,16 @@ main {
 .card {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
 }
+.details-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details {
+  padding: 1rem;
+  max-width: 50%;
+  text-align: center;
+}
 
 .card__header,
 .card__content {
@@ -93,12 +103,14 @@ main {
 }
 
 .btn {
+  padding: 0 1rem;
   font: inherit;
   border: 1px solid #00695c;
   color: #00695c;
   background: white;
   border-radius: 3px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .btn:hover,

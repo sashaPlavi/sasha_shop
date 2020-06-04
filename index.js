@@ -9,6 +9,7 @@ const app = express();
 app.set("view engine", "ejs");
 app.set("views", "views");
 
+const errorController = require("./controllers/error");
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
 const mongoose = require("mongoose");
@@ -28,10 +29,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
-app.use((req, res) => {
-  res.status(404).render("404", { pageTitle: "sasa", path: "/" });
-});
-
+app.use(errorController.get404page);
 app.listen(port, () => {
   console.log("app listening at " + port);
 });
