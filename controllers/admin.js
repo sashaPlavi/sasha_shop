@@ -59,7 +59,7 @@ exports.postEditProduct = (req, res, next) => {
 
   Products.findById(prodId)
     .then((product) => {
-      //console.log(product);
+      console.log(product);
 
       product.title = updatedTitle;
       product.imageUrl = updatedImageUrl;
@@ -69,10 +69,7 @@ exports.postEditProduct = (req, res, next) => {
     })
     .then((result) => {
       console.log("prod updated");
-      res.redirect("admin/a-products", {
-        pageTitle: "Admin Products",
-        path: "/admin/a-products",
-      });
+      res.redirect("admin/a-products");
     })
     .catch((err) => {
       console.log(err);
