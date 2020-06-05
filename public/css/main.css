@@ -50,8 +50,13 @@ main {
 .main-header__item a.active {
   color: #ffeb3b;
 }
+.container {
+  margin: 1rem;
+  text-align: center;
+}
 
 .grid {
+  margin-top: 2rem;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
