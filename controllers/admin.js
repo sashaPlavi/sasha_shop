@@ -30,12 +30,21 @@ exports.getAddProducts = (req, res, next) => {
   });
 };
 
-exports.addProduct = (req, res, next) => {
+exports.postAddProduct = (req, res, next) => {
+  console.log(req.body);
+  console.log(req);
+
   const title = req.body.title;
   const imageUrl = req.body.imageUrl;
   const price = req.body.price;
   const description = req.body.description;
-  const product = new Products({ title, imageUrl, price, description });
+  const product = new Products({
+    title,
+    imageUrl,
+    price,
+    description,
+    userId: req.user,
+  });
 
   product
     .save()

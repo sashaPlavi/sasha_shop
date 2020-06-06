@@ -22,7 +22,8 @@ var db = mongoose.connection;
 // db.once("open", function () {
 //   // we're connected!
 //   console.log("db conected");
-// }).app.use(bP.urlencoded({ extended: false }));
+// })
+app.use(bP.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use((req, res, next) => {
