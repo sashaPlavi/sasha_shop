@@ -26,6 +26,8 @@ exports.getCart = (req, res, next) => {
     .execPopulate()
     .then((user) => {
       const products = user.cart.items;
+      // console.log(products);
+
       res.render("shop/cart", {
         path: "/cart",
         pageTitle: "Your Cart",
@@ -47,4 +49,13 @@ exports.postCart = (req, res, next) => {
       console.log(result);
       res.redirect("/cart");
     });
+};
+exports.postCartDeleteProduct = (req, res, next) => {
+  const prodId = req.body.productId;
+  req.user
+    .removeFromChart(prodId)
+    .then((result) => {
+      res.redirect("/cart");
+    })
+    .catch((err) => console.log(err));
 };

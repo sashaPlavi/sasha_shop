@@ -50,4 +50,18 @@ userSchema.methods.addToChart = function (product) {
   return this.save();
 };
 
+userSchema.methods.removeFromChart = function (productId) {
+  // console.log(productId);
+
+  const updatedCartItems = this.cart.items.filter((item) => {
+    // console.log(item);
+
+    return item.productId.toString() !== productId.toString();
+  });
+  this.cart.items = updatedCartItems;
+  //console.log(this.cartItems);
+
+  return this.save();
+};
+
 module.exports = mongoose.model("User", userSchema);
