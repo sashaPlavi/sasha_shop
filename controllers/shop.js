@@ -4,7 +4,12 @@ const Order = require("../models/order");
 exports.getProducts = (req, res, next) => {
   Product.find().then((products) => {
     // console.log(products);
-    res.render("shop", { prods: products, pageTitle: "Shop", path: "/" });
+    res.render("shop", {
+      prods: products,
+      pageTitle: "Shop",
+      path: "/",
+      isAuth: req.isLogedIn,
+    });
   });
 };
 
@@ -17,6 +22,7 @@ exports.getProduct = (req, res, next) => {
         product: product,
         pageTitle: product.title,
         path: "/products",
+        isAuth: req.isLogedIn,
       });
     })
     .catch((err) => console.log(err));
@@ -33,6 +39,7 @@ exports.getCart = (req, res, next) => {
         path: "/cart",
         pageTitle: "Your Cart",
         products: products,
+        isAuth: req.isLogedIn,
       });
     })
     .catch((err) => console.log(err));
@@ -93,6 +100,7 @@ exports.getOrders = (req, res, next) => {
         path: "/orders",
         pageTitle: "Your Orders",
         orders: orders,
+        isAuth: req.isLogedIn,
       });
     })
     .catch((err) => console.log(err));

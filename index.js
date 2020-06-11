@@ -11,8 +11,11 @@ app.set("views", "views");
 
 const errorController = require("./controllers/error");
 const User = require("./models/user");
+
 const adminRoutes = require("./routes/admin");
 const shopRoutes = require("./routes/shop");
+const authRoutes = require("./routes/auth");
+
 const mongoose = require("mongoose");
 
 // db setup
@@ -37,6 +40,8 @@ app.use((req, res, next) => {
 
 app.use("/admin", adminRoutes);
 app.use(shopRoutes);
+app.use(authRoutes);
+
 app.use(errorController.get404page);
 mongoose.connect(mongoDB, { useNewUrlParser: true }).then((result) => {
   User.findOne().then((user) => {
