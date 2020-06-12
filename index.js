@@ -2,8 +2,15 @@ const express = require("express");
 const bP = require("body-parser");
 const path = require("path");
 const port = 3003;
+const mongoDB = "mongodb://localhost:mydb/my_database";
+const session = require("express-session");
+const MongoStore = require("connect-mongodb-session")(session);
 
 const app = express();
+const store = new MongoStore({
+  uri: mongoDB,
+  collection: "sessions",
+});
 
 // seting templating angine
 app.set("view engine", "ejs");
@@ -19,7 +26,6 @@ const authRoutes = require("./routes/auth");
 const mongoose = require("mongoose");
 
 // db setup
-const mongoDB = "mongodb://localhost:mydb/my_database";
 var db = mongoose.connection;
 // db.on("error", console.error.bind(console, "connection error:"));
 // db.once("open", function () {
@@ -28,6 +34,14 @@ var db = mongoose.connection;
 // })
 app.use(bP.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(
+  session({
+    secret: "my secret :)",
+    resave: false,
+    saveUninitialized: false,
+    store,
+  })
+);
 
 app.use((req, res, next) => {
   User.findById("5edb29b975a7a8231cfe4a44")
