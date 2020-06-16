@@ -1,13 +1,15 @@
 const Products = require("../models/products");
 
 exports.getProducts = (req, res, next) => {
+  console.log(req.session.isLogedIn);
+
   Products.find().then((products) => {
     // console.log(products);
     res.render("admin/a-products", {
       prods: products,
       pageTitle: "Admin Products",
       path: "/admin/a-products",
-      isAuth: req.isLogedIn,
+      isAuth: req.session.isLogedIn,
     });
   });
 };
@@ -20,16 +22,18 @@ exports.getEditProduct = (req, res, next) => {
         product: product,
         pageTitle: "Edit Product",
         path: "/admin/edit-product",
-        isAuth: req.isLogedIn,
+        isAuth: req.session.isLogedIn,
       });
     })
     .catch((err) => console.log(err));
 };
 exports.getAddProducts = (req, res, next) => {
+  console.log(req.session.isLogedIn);
+
   res.render("add-products", {
     pageTitle: "Add Products",
     path: "/admin/add-products",
-    isAuth: req.isLogedIn,
+    isAuth: req.session.isLogedIn,
   });
 };
 
@@ -46,7 +50,7 @@ exports.postAddProduct = (req, res, next) => {
     imageUrl,
     price,
     description,
-    userId: req.user,
+    userId: req.session.user,
   });
 
   product
