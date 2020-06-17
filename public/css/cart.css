@@ -1,5 +1,6 @@
-main {
+.details {
   margin-top: 3rem;
+  background: red;
 }
 
 .cart__item-list {
