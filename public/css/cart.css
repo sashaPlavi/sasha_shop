@@ -1,11 +1,10 @@
 .details {
-  margin-top: 3rem;
-  background: red;
+  margin-top: 5rem;
 }
 
 .cart__item-list {
   list-style: none;
-  margin-top: 0;
+
   padding: 0;
   margin: auto;
   width: 40rem;
@@ -13,6 +12,7 @@
 }
 
 .cart__item {
+  box-sizing: border-box;
   display: flex;
   align-items: center;
   justify-content: space-between;
