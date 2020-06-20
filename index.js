@@ -60,20 +60,7 @@ app.use(shopRoutes);
 app.use(authRoutes);
 
 app.use(errorController.get404page);
-mongoose.connect(mongoDB, { useNewUrlParser: true }).then((result) => {
-  User.findOne().then((user) => {
-    if (!user) {
-      const user = new User({
-        name: "Sasha",
-        email: "Sasha@sasha",
-        cart: {
-          items: [],
-        },
-      });
-      user.save();
-    }
-  });
-});
+mongoose.connect(mongoDB, { useNewUrlParser: true });
 app.listen(port, () => {
   console.log("app listening at " + port);
 });
