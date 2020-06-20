@@ -28,7 +28,10 @@ exports.getEditProduct = (req, res, next) => {
     .catch((err) => console.log(err));
 };
 exports.getAddProducts = (req, res, next) => {
-  console.log(req.session.isLogedIn);
+  //console.log(req.session.isLogedIn);
+  if (!req.session.isLogedIn) {
+    return res.redirect("/");
+  }
 
   res.render("add-products", {
     pageTitle: "Add Products",

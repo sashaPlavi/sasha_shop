@@ -13,14 +13,30 @@ exports.getLogin = (req, res, next) => {
   });
 };
 exports.postLogin = (req, res, next) => {
-  User.findById("5edb29b975a7a8231cfe4a44")
+  const email = req.body.email;
+  const password = req.body.password;
+  User.findOne({ email })
     .then((user) => {
-      req.session.user = user;
-      req.session.isLogedIn = true;
-      req.session.save((err) => {
-        console.log(err);
-        res.redirect("/");
-      });
+      if (!user) {
+        return res.redirect("/login");
+      }
+      bcrypt
+        .compare(password, user.password)
+        .then((match) => {
+          if (match) {
+            req.session.user = user;
+            req.session.isLogedIn = true;
+            return req.session.save((err) => {
+              console.log(err);
+              res.redirect("/");
+            });
+          }
+          res.redirect("/login");
+        })
+        .catch((err) => {
+          console.log(err);
+          res.redirect("/login");
+        });
     })
     .catch((err) => console.log(err));
 };
