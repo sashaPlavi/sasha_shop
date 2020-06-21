@@ -13,6 +13,8 @@ exports.getLogin = (req, res, next) => {
   });
 };
 exports.postLogin = (req, res, next) => {
+  console.log("post bla");
+
   const email = req.body.email;
   const password = req.body.password;
   User.findOne({ email })
@@ -28,6 +30,8 @@ exports.postLogin = (req, res, next) => {
             req.session.isLogedIn = true;
             return req.session.save((err) => {
               console.log(err);
+              console.log("bla Auth");
+
               res.redirect("/");
             });
           }

@@ -23,7 +23,7 @@
               ></textarea>
               <label for="imageUrl">imageUrl</label>
               <input type="text" name="imageUrl" />
-
+              <input type="hidden" name="_csrf" value="<%=csrfToken %> ">
               <input type="text" name="productId" style="display: none;" value="<%=product.id %>" />
            
               <button type="submit">

@@ -5,12 +5,14 @@ const port = 3003;
 const mongoDB = "mongodb://localhost:mydb/my_database";
 const session = require("express-session");
 const MongoStore = require("connect-mongodb-session")(session);
+const csurf = require("csurf");
 
 const app = express();
 const store = new MongoStore({
   uri: mongoDB,
   collection: "sessions",
 });
+const csrfProtect = csurf();
 
 // seting templating angine
 app.set("view engine", "ejs");
@@ -42,6 +44,7 @@ app.use(
     store,
   })
 );
+app.use(csrfProtect);
 
 app.use((req, res, next) => {
   if (!req.session.user) {
@@ -53,6 +56,15 @@ app.use((req, res, next) => {
       next();
     })
     .catch((err) => console.log(err));
+});
+
+app.use((req, res, next) => {
+  res.locals.isAuth = req.session.isLogedin;
+  res.locals.csrfToken = req.csrfToken();
+  console.log(res.locals.csrfToken);
+  console.log("bla1");
+
+  next();
 });
 
 app.use("/admin", adminRoutes);

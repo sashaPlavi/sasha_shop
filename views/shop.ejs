@@ -7,6 +7,7 @@
 <main>
     <% if (prods.length > 0) { %>
         <div class="grid">
+            <h1><%=csrfToken  %> </h1>
             <% for (let product of prods) { %>
                 <article class="card product-item">
                     <header class="card__header">
@@ -24,8 +25,9 @@
                         <a href="/product/<%= product.id  %>" class="btn">Details</a>
                         <% if( isAuth) { %>
                         <form action="/cart" method="post">
-                            <button class="btn" type="submit">Add to Cart</button>
+                            <input type="hidden" name="_csrf" value="<%=csrfToken %> ">
                             <input type="hidden" name="productId" value="<%= product._id %>">
+                            <button class="btn" type="submit">Add to Cart</button>
                         </form>
                     <% } %> 
                     </div>
