@@ -1,5 +1,6 @@
 const express = require("express");
 const bP = require("body-parser");
+const cookieParser = require("cookie-parser");
 const path = require("path");
 const port = 3003;
 const mongoDB = "mongodb://localhost:mydb/my_database";
@@ -12,7 +13,7 @@ const store = new MongoStore({
   uri: mongoDB,
   collection: "sessions",
 });
-const csrfProtect = csurf();
+const csrfProtect = csurf({ cookie: true });
 
 // seting templating angine
 app.set("view engine", "ejs");
@@ -35,6 +36,7 @@ var db = mongoose.connection;
 //   console.log("db conected");
 // })
 app.use(bP.urlencoded({ extended: false }));
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
